@@ -156,7 +156,7 @@ class Main_Page(QMainWindow, MainUI):
                 # gamePage.show()
 
             elif obj.objectName() == f'new_frame_{i}' and event.type() == QEvent.MouseButtonPress:
-                print(self.newclick_url[i])
+                print(self.new_click_url[i])
 
             if obj.objectName() == f'new_frame_{i}' and event.type() == QEvent.Enter:
                 obj.setStyleSheet("background-color: rgb(130, 186, 255);")
@@ -196,6 +196,17 @@ class Game_Page(QMainWindow, SubUI):
         html_text = response.text
 
         self.soup = bs(html_text, 'html.parser')
+
+    def crawling_data(self):
+        game_des = self.soup.find('div', class_='game_description_snippet')
+        self.set_game_des(game_des)
+
+        #game.info =
+    def set_game_des(self, data):
+        # 문자열 크기, 라벨 크기에 따라 숫자 카운트, 개행하는 로직 추가하기.
+        data = str(data)
+        self.label.setText(data)
+
 
 
 if __name__ == '__main__':
